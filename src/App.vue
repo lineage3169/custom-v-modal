@@ -1,28 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <b-button @click="modalShowA = !modalShowA">Open Modal A</b-button>
+    <b-button @click="modalShowB = !modalShowB">Open Modal B</b-button>
+    <!-- props + emit -->
+    <ModalA :propsData="modalShowA" @closeModal="closeModal"/>
+    <!-- cutom v-modal -->
+    <ModalB v-model="modalShowB"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ModalA from '@/components/modal-a'
+import ModalB from '@/components/modal-b'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    ModalA,ModalB
+  },
+  data() {
+    return {
+      modalShowA: false,
+      modalShowB: false,
+    }
+  },
+  methods: {
+    closeModal() {
+      this.modalShowA = false
+    }
+  },
 }
 </script>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
